@@ -87,7 +87,6 @@ class NewImage(webapp2.RequestHandler):
         self.redirect('/images')
         
 class DeleteImage(webapp2.RequestHandler):
-    
     def post(self):
         urlsafekey = self.request.get('image_key')
         image_key = ndb.Key(urlsafe=urlsafekey)
