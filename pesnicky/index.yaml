@@ -4,4 +4,9 @@ indexes:
   properties:
   - name: name
   
+- kind: Song
+  ancestor: yes
+  properties:
+  - name: name
+  
   

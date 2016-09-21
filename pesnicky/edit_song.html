@@ -1,0 +1,21 @@
+{% extends "master_page.html" %}
+{% block body %}
+<h3>Edituj pesnicku</h3>
+<form action="{{new_song_url}}" method="post">
+  <table>
+  <tr><td>Meno pesnicky:</td><td><input name="song_name" type="text" value="{{song.name}}"></td></tr>
+  <tr><td>Obrazok:</td><td>
+  	<select name="song_image">
+  	  {% for image in images %}
+  	    <option value="{{image.key.urlsafe()}}" {% if image.key == song.image %} selected {% endif %}>
+  	      {{image.name}}
+  	    </option>
+  	  {% endfor %}
+  	</select>
+  </td></tr>
+  <tr><td>Noty:</td><td><input name="song_notes" type="text" value="{{song.notes}}"></td></tr>
+  </table>
+  <div><input type="submit" class="btn btn-large btn-primary" value="Uloz"></div>
+  <input type=hidden name='song_key' value="{{song.key.urlsafe()}}">
+</form>
+{% endblock %}

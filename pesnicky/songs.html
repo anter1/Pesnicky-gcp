@@ -1,0 +1,47 @@
+{% extends "master_page.html" %}
+{% block body %}
+<table border=1>
+  <tr>
+    <th>Meno</th>
+ 	<th>Obrazok</th>
+ 	<th>Noty</th>
+ 	<th>Edituj</th>
+ 	<th>Zmaz</th>
+  </tr>
+  {% for song in songs %}
+  <tr>
+    <td>{{song.name}}</td>
+ 	<td><img src="{{song.image.get().data_url()}}" width=100></td>
+ 	<td>{{song.notes}}</td>
+ 	<td>
+ 	  <form action="{{edit_song_url}}" method="get">
+ 	    <input type="hidden" name="song_key" value="{{song.key.urlsafe()}}">
+ 	    <input type="submit" class="btn btn-small" value="Edituj">
+ 	  </form>
+ 	</td>
+    <td>
+ 	  <form action="{{delete_song_url}}" method="post">
+ 	    <input type="hidden" name="song_key" value="{{song.key.urlsafe()}}">
+ 	    <input type="submit" class="btn btn-small" value="X">
+ 	  </form>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+
+<form action="{{new_song_url}}" method="post">
+  <h3>Nova pesnicka</h3>
+  <table>
+  <tr><td>Meno pesnicky:</td><td><input name="song_name" type="text" ></td></tr>
+  <tr><td>Obrazok:</td><td>
+  	<select name="song_image">
+  	  {% for image in images %}
+  	    <option value="{{image.key.urlsafe()}}">{{image.name}}</option>
+  	  {% endfor %}
+  	</select>
+  </td></tr>
+  <tr><td>Noty:</td><td><input name="song_notes" type="text"></td></tr>
+  </table>
+  <div><input type="submit" class="btn btn-large btn-primary" value="Pridaj pesnicku"></div>
+</form>
+{% endblock %}
