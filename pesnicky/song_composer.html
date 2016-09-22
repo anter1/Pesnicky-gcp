@@ -1,0 +1,34 @@
+{% macro song_composer(song, images, new_song_url, submit_btn_text) %}
+<script>
+function validateForm() {
+	var valid_notes = "CDEFGABcd";
+	var notes = document.forms["new_song_form"]["song_notes"].value;
+	for (var i = 0; i < notes.length; ++i) {
+		if (valid_notes.indexOf(notes[i]) === -1) {
+			alert("Zla nota '" + notes[i] +"' na pozicii: " + (i+1));
+			return false;
+		}
+	}
+	return true;
+}
+</script>
+<form name="new_song_form" action="{{new_song_url}}" onsubmit="return validateForm()" method="post">
+  <table>
+  <tr><td>Meno pesnicky:</td><td><input name="song_name" type="text" value="{{song.name if song}}"></td></tr>
+  <tr><td>Obrazok:</td><td>
+  	<select name="song_image">
+  	  {% for image in images %}
+  	    <option value="{{image.key.urlsafe()}}" {{ 'selected' if image.key == (song.image if song) }}>
+  	      {{image.name}}
+  	    </option>
+  	  {% endfor %}
+  	</select>
+  </td></tr>
+  <tr><td>Noty:</td><td><input name="song_notes" type="text" value="{{song.notes if song}}" style='width:600px'></td></tr>
+  </table>
+  <div><input type="submit" class="btn btn-large btn-primary" value="{{submit_btn_text}}"></div>
+  {% if song is not none %}
+    <input type=hidden name='song_key' value="{{song.key.urlsafe()}}">
+  {% endif %}
+</form>
+{% endmacro %}

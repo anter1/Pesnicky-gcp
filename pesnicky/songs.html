@@ -1,4 +1,5 @@
 {% extends "master_page.html" %}
+{% from 'song_composer.html' import song_composer %}
 {% block body %}
 <table border=1>
   <tr>
@@ -28,20 +29,8 @@
   </tr>
   {% endfor %}
 </table>
+<hr>
+<h3>Nova pesnicka</h3>
+{{song_composer(None, images, new_song_url, 'Pridaj pesnicku')}}
 
-<form action="{{new_song_url}}" method="post">
-  <h3>Nova pesnicka</h3>
-  <table>
-  <tr><td>Meno pesnicky:</td><td><input name="song_name" type="text" ></td></tr>
-  <tr><td>Obrazok:</td><td>
-  	<select name="song_image">
-  	  {% for image in images %}
-  	    <option value="{{image.key.urlsafe()}}">{{image.name}}</option>
-  	  {% endfor %}
-  	</select>
-  </td></tr>
-  <tr><td>Noty:</td><td><input name="song_notes" type="text"></td></tr>
-  </table>
-  <div><input type="submit" class="btn btn-large btn-primary" value="Pridaj pesnicku"></div>
-</form>
 {% endblock %}
