@@ -2,7 +2,16 @@
 <script>
 function validateForm() {
 	var valid_notes = "CDEFGABcd";
+	var name = document.forms["new_song_form"]["song_name"].value;
+	if (!name) {
+		alert("Chyba meno");
+		return false;
+	}
 	var notes = document.forms["new_song_form"]["song_notes"].value;
+	if (!notes) {
+		alert("Chybaju noty");
+		return false;
+	}
 	for (var i = 0; i < notes.length; ++i) {
 		if (valid_notes.indexOf(notes[i]) === -1) {
 			alert("Zla nota '" + notes[i] +"' na pozicii: " + (i+1));

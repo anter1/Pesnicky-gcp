@@ -20,7 +20,22 @@
   {% endfor %}
 </table>
 
-<form action="{{new_image_url}}" method="post">
+<script>
+function validate_image_form() {
+	var name = document.forms["new_image_form"]["image_name"].value;
+	if (!name) {
+		alert("Chyba meno obrazka");
+		return false;
+	}
+	var url = document.forms["new_image_form"]["image_url"].value;
+	if (!url) {
+		alert("Chyba url obrazka");
+		return false;
+	}
+	return true;
+}
+</script>
+<form name="new_image_form" action="{{new_image_url}}" onsubmit="return validate_image_form()" method="post">
   <h3>Novy obrazok</h3>
   <div>Meno obrazka: <input name="image_name" type="text" ></div>
   <div>Url obrazka: <input name="image_url" type="text"></div>
