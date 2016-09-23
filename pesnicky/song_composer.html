@@ -1,7 +1,7 @@
 {% macro song_composer(song, images, new_song_url, submit_btn_text) %}
 <script>
 function validateForm() {
-	var valid_notes = "CDEFGABcd";
+	var valid_notes = "abCDEFGABcd";
 	var name = document.forms["new_song_form"]["song_name"].value;
 	if (!name) {
 		alert("Chyba meno");
